@@ -1,27 +1,31 @@
-// script.js
-document.addEventListener("DOMContentLoaded", function() {
-    // Initialize EmailJS with your API Key (User ID)
-    emailjs.init("O9PaWuor-bfdg9keB");  // Replace with your actual API Key
+document.addEventListener("DOMContentLoaded", function () {
+  const form = document.getElementById("contactForm");
 
-    const form = document.getElementById("contactForm");
-    
-    form.addEventListener("submit", function(event) {
-        event.preventDefault();
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
 
-        const name = document.getElementById("name").value;
-        const email = document.getElementById("email").value;
-        const message = document.getElementById("message").value;
+    const formData = {
+      fullName: document.getElementById("fullName").value,
+      address: document.getElementById("address").value,
+      age: document.getElementById("age").value,
+      sex: document.getElementById("sex").value,
+      maritalStatus: document.getElementById("maritalStatus").value,
+      nationality: document.getElementById("nationality").value,
+      cellNumber: document.getElementById("cellNumber").value,
+      occupation: document.getElementById("occupation").value,
+      monthlyIncome: document.getElementById("monthlyIncome").value,
+      email: document.getElementById("email").value,
+      delivery: document.getElementById("delivery").value,
+    };
 
-        emailjs.send("service_8yfnvf1", "template_j9ujikq", {  // Replace with your service ID and template ID
-            name: name,
-            email: email,
-            message: message
-        })
-        .then(function(response) {
-            alert("Message sent successfully!");
-            form.reset();
-        }, function(error) {
-            alert("Failed to send message. Please try again.");
-        });
-    });
+    emailjs.send("service_8yfnvf1", "template_s0qnuv7", formData).then(
+      function (response) {
+        alert("Message sent successfully!");
+        form.reset();
+      },
+      function (error) {
+        alert("Failed to send message. Please try again.");
+      }
+    );
+  });
 });
